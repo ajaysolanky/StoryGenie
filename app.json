@@ -2,9 +2,14 @@
   "expo": {
     "name": "StoryGenie",
     "slug": "StoryGenie",
+    "primaryColor": "#213b55",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "facebookAppId": "1112497872824021",
+    "facebookDisplayName": "StoryGenie",
+    "facebookAutoLogAppEventsEnabled": true,
+    "facebookAdvertiserIDCollectionEnabled": true,
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -17,7 +22,12 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.storygenie.storygenie",
+      "buildNumber": "1.0.0",
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSUserTrackingUsageDescription": "We track users for advertising purposes"
+      }
     },
     "android": {
       "adaptiveIcon": {
