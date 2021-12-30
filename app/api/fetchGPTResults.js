@@ -41,7 +41,10 @@ const fetchGPTResults = async ({ text, args, num_retries = 1 }) => {
       return {
         ok: response.ok,
         nb_generated_tokens: response.data.nb_generated_tokens,
-        generated_text: response.data.generated_text?.trimEnd(),
+        generated_text: response.data.generated_text
+          ?.trimEnd()
+          .replace("�", `"`),
+        // .replace(/[^a-zA-Z ]/g, ""),
         //   .replace(/[^\x00-\x7F]/g, " "),
       }; //fields: ok, generated_text, nb_generated_tokens
     }

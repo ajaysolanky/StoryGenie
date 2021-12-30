@@ -48,6 +48,8 @@ const StoryScreen = ({ nativeAd }) => {
   const [allText, setAllText] = useState(false);
   const [justUndid, setJustUndid] = useState(false);
 
+  const [dontShowAdIndeces, setDontShowAdIndices] = useState([]);
+
   const moodLine = promptMood ? ` ${promptMood}` : "";
   const nameLine = promptName ? ` about ${promptName}` : "";
   const introLine = `And so our${moodLine} tale${nameLine} begins...`;
@@ -79,7 +81,9 @@ const StoryScreen = ({ nativeAd }) => {
 
   const shouldLoadAd = (idx) => {
     // return intToBoolRand(idx, AD_LOAD, SESSION_ID);
-    return idx % Math.floor(1.0 / AD_LOAD) === 0;
+    return (
+      idx % Math.floor(1.0 / AD_LOAD) === 0 && !dontShowAdIndeces.includes(idx)
+    );
   };
 
   useEffect(() => {
@@ -129,7 +133,10 @@ const StoryScreen = ({ nativeAd }) => {
             placementId={BANNER_ID}
             type="standard"
             onPress={() => console.log("click")}
-            onError={(error) => console.log("error", error)}
+            onError={(error) => {
+              console.log("error", error);
+              setDontShowAdIndices([...dontShowAdIndeces, index]);
+            }}
           />
         </View>
       )}

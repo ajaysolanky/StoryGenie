@@ -14,17 +14,25 @@ import AppStackNavigator from "./app/navigation/AppStackNavigator";
 import routes from "./app/navigation/routes";
 // import fbAdsManager from "./app/config/fbAdsManager";
 import { SESSION_ID } from "./app/utility/sessionId"; // don't remove this, it needs to be called
+import { requestTrackingPermissionsAsync } from "expo-tracking-transparency";
+import { useEffect } from "react";
 
 LogBox.ignoreLogs([
   "Picker has been extracted from react-native core and will be removed in a future",
 ]);
 
-// enables fake FB ads
-// FacebookAds.AdSettings.addTestDevice(FacebookAds.AdSettings.currentDeviceHash);
-
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  useEffect(() => {
+    (async () => {
+      const { status } = await requestTrackingPermissionsAsync();
+      if (status === "granted") {
+        console.log("Yay! I have user permission to track data");
+      }
+    })();
+  }, []);
+
   const [isLoaded] = useFonts({
     Aladdin: require("./assets/aladdin_font.ttf"),
     AladdinTwo: require("./assets/aladdin_font_two.ttf"),

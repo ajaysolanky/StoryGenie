@@ -32,7 +32,7 @@ import AdComponent from "../components/AdComponent";
 
 const PromptScreen = ({ navigation }) => {
   const options = [
-    { value: null, label: "general" },
+    { value: null, label: "any" },
     { value: "sad", label: "sad" },
     { value: "adventure", label: "adventure" },
     { value: "romantic", label: "romantic" },
