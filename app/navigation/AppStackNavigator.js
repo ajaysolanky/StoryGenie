@@ -1,7 +1,21 @@
 import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  TransitionPresets,
+} from "@react-navigation/stack";
 import { BlurView } from "expo-blur";
 import { useSelector } from "react-redux";
+import {
+  MaterialCommunityIcons,
+  Feather,
+  Ionicons,
+  Entypo,
+  FontAwesome,
+  Octicons,
+  AntDesign,
+  Fontisto,
+  EvilIcons,
+} from "@expo/vector-icons";
 
 import routes from "./routes";
 import PromptScreen from "../screens/PromptScreen";
@@ -36,9 +50,9 @@ const AppStackNavigator = () => {
         headerTitleStyle: {
           color: "white",
         },
-        // headerBackImage: () => (
-        //   <Icon name="chevron-left" backgroundColor="transparent" size={60} />
-        // ),
+        headerBackImage: () => (
+          <MaterialCommunityIcons name="chevron-left" color="white" size={60} />
+        ),
         // headerBackTitleVisible: false,
       }}
     >
@@ -50,7 +64,11 @@ const AppStackNavigator = () => {
       <Stack.Screen
         name={routes.STORY_SCREEN}
         component={StoryScreen}
-        options={{ headerTitle: "", headerBackTitle: "Back" }}
+        options={{
+          headerTitle: "",
+          headerBackTitle: "Back",
+          ...TransitionPresets.SlideFromRightIOS,
+        }}
       />
     </Stack.Navigator>
   );

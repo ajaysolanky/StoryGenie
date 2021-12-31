@@ -10,10 +10,12 @@ import {
   KeyboardAvoidingView,
   Share,
   Keyboard,
+  Dimensions,
 } from "react-native";
 
 import SelectInput from "react-native-select-input-ios";
 import { Picker } from "@react-native-picker/picker";
+// import Picker from "react-native-universal-picker";
 import { KeyboardAccessoryView } from "react-native-keyboard-accessory";
 import { useSelector, useDispatch } from "react-redux";
 import KeyboardSpacer from "react-native-keyboard-spacer";
@@ -97,6 +99,40 @@ const PromptScreen = ({ navigation }) => {
     navigation.navigate(routes.STORY_SCREEN);
   };
 
+  const androidPicker = (
+    <View
+      style={[
+        styles.selectInput,
+        {
+          justifyContent: "center",
+          flexDirection: "column",
+        },
+      ]}
+    >
+      <Picker
+        selectedValue={selectedMood}
+        onValueChange={setSelectedMood}
+        mode="dialog"
+        backgroundColor="white"
+      >
+        {options.map((e, i) => (
+          <Picker.Item label={e.label} value={e.value} key={i} />
+        ))}
+      </Picker>
+    </View>
+  );
+
+  const iosPicker = (
+    <SelectInput
+      value={selectedMood}
+      options={options}
+      onCancelEditing={() => console.log("onCancel")}
+      onSubmitEditing={setSelectedMood}
+      style={styles.selectInput}
+      labelStyle={styles.selectInputInner}
+    />
+  );
+
   return (
     <ScrollView
       ref={scrollRef}
@@ -146,13 +182,7 @@ const PromptScreen = ({ navigation }) => {
       <View style={styles.row}>
         <View style={styles.pickerRow}>
           <Text style={[styles.mediumText, { paddingRight: 14 }]}>Genre:</Text>
-          <SelectInput
-            value={selectedMood}
-            options={options}
-            onCancelEditing={() => console.log("onCancel")}
-            onSubmitEditing={setSelectedMood}
-            style={styles.selectInput}
-          />
+          {Platform.OS === "ios" ? iosPicker : androidPicker}
         </View>
       </View>
       {/* <KeyboardAccessoryView alwaysVisible={true} androidAdjustResize>
@@ -213,6 +243,7 @@ const PromptScreen = ({ navigation }) => {
         Generate Story
       </Button>
       {/* </KeyboardAvoidingView> */}
+      {/* {Platform.OS === "ios" ? iosPicker : androidPicker} */}
     </ScrollView>
   );
 };
@@ -227,7 +258,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     paddingVertical: 20,
-    height: 1000,
+    height: Dimensions.get("window").height + (Platform.OS === "ios" ? 300 : 0),
   },
   textInputView: {
     padding: 8,
@@ -275,13 +306,14 @@ const styles = StyleSheet.create({
   headerLogo: {
     width: 200 * 1.5,
     height: 150 * 1.5,
+    marginTop: 10,
   },
   titleLogo: {
     width: 350,
     height: 100,
   },
   mediumText: {
-    fontFamily: "Helvetica-Bold",
+    fontFamily: "HelveticaBold",
     color: colors.pink,
     fontSize: 25,
   },
@@ -291,6 +323,10 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     margin: 10,
+  },
+  selectInputInner: {
+    height: 36,
+    borderRadius: 4,
   },
 });
 

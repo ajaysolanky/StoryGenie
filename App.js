@@ -37,6 +37,9 @@ export default function App() {
     Aladdin: require("./assets/aladdin_font.ttf"),
     AladdinTwo: require("./assets/aladdin_font_two.ttf"),
     EnchantedLand: require("./assets/EnchantedLand.otf"),
+    HelveticaBold: require("./assets/Helvetica-Bold-Font.ttf"),
+    TrebuchetMS: require("./assets/Trebuchet-MS.ttf"),
+    TrebuchetMSItalic: require("./assets/Trebuchet-MS-Italic.ttf"),
   });
 
   if (!isLoaded) return <AppLoading />;

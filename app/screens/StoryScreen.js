@@ -318,7 +318,7 @@ const styles = StyleSheet.create({
   storyText: {
     fontSize: 20,
     // color: "red",
-    fontFamily: "Trebuchet MS",
+    fontFamily: "TrebuchetMS",
     padding: 5,
   },
 });
