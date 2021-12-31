@@ -3,7 +3,7 @@
     "name": "StoryGenie",
     "slug": "StoryGenie",
     "primaryColor": "#213b55",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "facebookAppId": "1112497872824021",
@@ -23,7 +23,7 @@
     ],
     "ios": {
       "bundleIdentifier": "com.storygenie.storygenie",
-      "buildNumber": "1.1.0",
+      "buildNumber": "1.2.0",
       "supportsTablet": true,
       "infoPlist": {
         "NSUserTrackingUsageDescription": "We track users for advertising purposes"
@@ -33,7 +33,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.storygenie.storygenie"
     },
     "web": {
       "favicon": "./assets/favicon.png"
