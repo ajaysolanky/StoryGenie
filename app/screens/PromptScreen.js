@@ -155,16 +155,6 @@ const PromptScreen = ({ navigation }) => {
         styles.container,
       ]}
     >
-      {/* <KeyboardAvoidingView
-        behavior={"padding"}
-        style={{
-          flex: 1,
-          width: "100%",
-          position: "absolute",
-          top: 100,
-        }}
-        enabled
-      > */}
       <Image
         style={styles.headerLogo}
         resizeMode="contain"
@@ -196,7 +186,8 @@ const PromptScreen = ({ navigation }) => {
           />
         </View>
       </View>
-      <View style={styles.row}>
+      {/* Disabled genre for now */}
+      {/* <View style={styles.row}>
         <View style={styles.pickerRow}>
           <Text style={[styles.mediumText, { paddingRight: 14 }]}>Genre:</Text>
           <TouchableWithoutFeedback
@@ -205,26 +196,7 @@ const PromptScreen = ({ navigation }) => {
             {Platform.OS === "ios" ? iosPicker : androidPicker}
           </TouchableWithoutFeedback>
         </View>
-      </View>
-      {/* <KeyboardAccessoryView alwaysVisible={true} androidAdjustResize>
-                    {({isKeyboardVisible}) => (
-                        <View style={styles.textInputView}>
-                            <TextInput
-                                placeholder="Write your message"
-                                underlineColorAndroid="transparent"
-                                style={styles.textInput}
-                                multiline={true}
-                            />
-                            {isKeyboardVisible && (
-                                <Button
-                                style={styles.textInputButton}
-                                title="Send"
-                                onPress={() => {}}
-                                />
-                            )}
-                        </View>
-                    )}
-                </KeyboardAccessoryView> */}
+      </View> */}
       <Text
         style={[styles.mediumText, { alignSelf: "flex-start", margin: 10 }]}
       >
@@ -255,19 +227,16 @@ const PromptScreen = ({ navigation }) => {
         onSubmitEditing={() => promptInputRef.current.blur()}
         placeholder="Write the first couple lines of the story... or hit 'Random Prompt' for inspiration!"
         placeholderTextColor={colors.placeholderText}
-        // onFocus={}
       />
-      {/* <KeyboardSpacer /> */}
       <Button
         onPress={submitPrompt}
+        disabled={promptText === ""}
         mode="contained"
         icon="book-open-page-variant"
         color={colors.green}
       >
         Generate Story
       </Button>
-      {/* </KeyboardAvoidingView> */}
-      {/* {Platform.OS === "ios" ? iosPicker : androidPicker} */}
     </ScrollView>
   );
 };
