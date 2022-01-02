@@ -120,7 +120,7 @@ const StoryScreen = ({ nativeAd }) => {
     logEventFirebase(CLICK_SHARE_TOP_RIGHT);
     try {
       const result = await Share.share({
-        message: generateShareText(promptText + storyText),
+        message: generateShareText(promptText, storyText),
       });
       if (result.action === Share.sharedAction) {
         logEventFirebase(SHARE_SUCCESS, { activity_type: result.activityType });
