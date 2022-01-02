@@ -11,6 +11,7 @@ import {
   Share,
   Keyboard,
   Dimensions,
+  TouchableWithoutFeedback,
 } from "react-native";
 
 import SelectInput from "react-native-select-input-ios";
@@ -31,6 +32,14 @@ import colors from "../config/colors";
 import routes from "../navigation/routes";
 import { CHARACTER_SYMBOL } from "../config/randomPrompts";
 import AdComponent from "../components/AdComponent";
+import {
+  CLICK_FOCUS_GENRE_INPUT,
+  CLICK_FOCUS_NAME_INPUT,
+  CLICK_FOCUS_PROMPT_INPUT,
+  CLICK_RANDOM_PROMPT,
+  CLICK_SUBMIT_PROMPT,
+  logEventFirebase,
+} from "../utility/firebaseLogging";
 
 const PromptScreen = ({ navigation }) => {
   const options = [
@@ -80,6 +89,7 @@ const PromptScreen = ({ navigation }) => {
 
   const onPressRandom = () => {
     setRandString(selectRandomPrompt(nameText));
+    logEventFirebase(CLICK_RANDOM_PROMPT);
   };
 
   const onPromptChangeText = (newText) => {
@@ -88,11 +98,15 @@ const PromptScreen = ({ navigation }) => {
   };
 
   const submitPrompt = () => {
-    dispatch({
-      type: actionTypes.SET_PROMPT,
+    const data = {
       text: finalPromptText.trim(),
       mood: selectedMood,
       name: nameText.trim(),
+    };
+    logEventFirebase(CLICK_SUBMIT_PROMPT, data);
+    dispatch({
+      type: actionTypes.SET_PROMPT,
+      ...data,
     });
     dispatch({ type: actionTypes.RESET_STORY_TEXT });
     dispatch(generateInitStory(selectedMood, nameText, finalPromptText));
@@ -167,7 +181,10 @@ const PromptScreen = ({ navigation }) => {
           <TextInput
             ref={nameInputRef}
             style={styles.selectInput}
-            onFocus={() => scrollRef.current.scrollToEnd()}
+            onFocus={() => {
+              scrollRef.current.scrollToEnd();
+              logEventFirebase(CLICK_FOCUS_NAME_INPUT);
+            }}
             onChangeText={setNameText}
             value={nameText}
             keyboardType="ascii-capable"
@@ -182,7 +199,11 @@ const PromptScreen = ({ navigation }) => {
       <View style={styles.row}>
         <View style={styles.pickerRow}>
           <Text style={[styles.mediumText, { paddingRight: 14 }]}>Genre:</Text>
-          {Platform.OS === "ios" ? iosPicker : androidPicker}
+          <TouchableWithoutFeedback
+            onPress={() => logEventFirebase(CLICK_FOCUS_GENRE_INPUT)}
+          >
+            {Platform.OS === "ios" ? iosPicker : androidPicker}
+          </TouchableWithoutFeedback>
         </View>
       </View>
       {/* <KeyboardAccessoryView alwaysVisible={true} androidAdjustResize>
@@ -221,7 +242,10 @@ const PromptScreen = ({ navigation }) => {
       <TextInput
         ref={promptInputRef}
         style={styles.promptInput}
-        onFocus={() => scrollRef.current.scrollToEnd()}
+        onFocus={() => {
+          scrollRef.current.scrollToEnd();
+          logEventFirebase(CLICK_FOCUS_PROMPT_INPUT);
+        }}
         onChangeText={onPromptChangeText}
         value={finalPromptText}
         multiline={true}
@@ -258,7 +282,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     paddingVertical: 20,
-    height: Dimensions.get("window").height + (Platform.OS === "ios" ? 300 : 0),
+    height: Dimensions.get("screen").height + (Platform.OS === "ios" ? 300 : 0),
   },
   textInputView: {
     padding: 8,

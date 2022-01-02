@@ -3,7 +3,7 @@
     "name": "StoryGenie",
     "slug": "StoryGenie",
     "primaryColor": "#213b55",
-    "version": "1.2.3",
+    "version": "1.3.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "facebookAppId": "1112497872824021",
@@ -22,24 +22,37 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier": "com.storygenie.storygenie",
-      "buildNumber": "1.2.3",
       "supportsTablet": true,
+      "bundleIdentifier": "com.storygenie.storygenie",
+      "googleServicesFile": "./GoogleService-Info.plist",
+      "buildNumber": "1.3.0",
       "infoPlist": {
         "NSUserTrackingUsageDescription": "We track users for advertising purposes"
       }
     },
     "android": {
+      "versionCode": 4,
+      "package": "com.storygenie.storygenie",
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "versionCode": 3,
-      "package": "com.storygenie.storygenie",
       "permissions": []
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "config": {
+        "firebase": {
+          "apiKey": "AIzaSyDH2AAOt5kMrYXtCv5SLsOaI-72eP94OEY",
+          "authDomain": "storygenie.firebaseapp.com",
+          "projectId": "storygenie",
+          "storageBucket": "storygenie.appspot.com",
+          "messagingSenderId": "590593965600",
+          "appId": "1:590593965600:web:d566502b83dad14c0a4645",
+          "measurementId": "G-9MTZW3M73H"
+        }
+      }
     },
     "plugins": [
       "expo-tracking-transparency"

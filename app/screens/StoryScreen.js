@@ -28,6 +28,16 @@ import { AD_LOAD, BANNER_ID } from "../config/ads";
 import AdComponent from "../components/AdComponent";
 import { intToBoolRand } from "../utility/crypto";
 import { SESSION_ID } from "../utility/sessionId";
+import {
+  CLICK_KEEP_WRITING,
+  CLICK_RETRY_PROMPT,
+  CLICK_SHARE_TOP_RIGHT,
+  CLICK_STORY_CARD,
+  CLICK_UNDO_LAST,
+  logEventFirebase,
+  SHARE_DISMISS,
+  SHARE_SUCCESS,
+} from "../utility/firebaseLogging";
 
 // Lottie genie: https://lottiefiles.com/58856-aladdin-genie
 
@@ -64,16 +74,19 @@ const StoryScreen = ({ nativeAd }) => {
   const flRef = useRef();
 
   const clickGenMoreStory = () => {
+    logEventFirebase(CLICK_KEEP_WRITING);
     setAllText(true);
     dispatch(generateMoreStory(promptMood, promptName, promptText + storyText));
   };
 
   const undoLastStory = () => {
+    logEventFirebase(CLICK_UNDO_LAST);
     setJustUndid(true);
     dispatch({ type: actions.REMOVE_STORY_TEXT });
   };
 
   const retryPrompt = () => {
+    logEventFirebase(CLICK_RETRY_PROMPT);
     setJustUndid(true);
     dispatch({ type: actions.RESET_STORY_TEXT });
     dispatch(generateMoreStory(promptMood, promptName, promptText));
@@ -104,18 +117,29 @@ const StoryScreen = ({ nativeAd }) => {
   };
 
   const onShare = async () => {
+    logEventFirebase(CLICK_SHARE_TOP_RIGHT);
     try {
       const result = await Share.share({
         message: generateShareText(promptText + storyText),
       });
+      if (result.action === Share.sharedAction) {
+        logEventFirebase(SHARE_SUCCESS, { activity_type: result.activityType });
+      } else {
+        logEventFirebase(SHARE_DISMISS);
+      }
     } catch (error) {
       // idk
     }
   };
 
+  const onClickStoryCard = () => {
+    logEventFirebase(CLICK_STORY_CARD);
+    setAllText(true);
+  };
+
   const storyCard = (textEl, index) => (
     <View style={styles.storyPlusAdCard}>
-      <TouchableOpacity onPress={setAllText}>
+      <TouchableOpacity onPress={onClickStoryCard}>
         <View
           key={Math.random()}
           onLayout={(e) => {

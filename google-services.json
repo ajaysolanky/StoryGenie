@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "590593965600",
+    "project_id": "storygenie",
+    "storage_bucket": "storygenie.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:590593965600:android:7878a431e18699710a4645",
+        "android_client_info": {
+          "package_name": "com.storygenie.storygenie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "590593965600-b437g2jje5v4floihs0pj2uev5do4kk2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfiNsBo8ooZmx2fRHtt2DsJ2R6CNcl2dM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "590593965600-b437g2jje5v4floihs0pj2uev5do4kk2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "590593965600-7smim5dhbosrsf1sdf9mj7hpskjj9ubm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.storygenie.storygenie"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
