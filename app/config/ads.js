@@ -1,6 +1,6 @@
 import { Platform } from "react-native";
 
-export const AD_LOAD = 1.0;
+export const AD_LOAD = 0.25;
 
 // export const MEDIUM_RECTANGLE_PLACEMENT_ID =
 //   "1112497872824021_1113057069434768";
