@@ -220,6 +220,10 @@ const StoryScreen = ({ nativeAd }) => {
         // }}
         renderItem={({ item, index, separators }) => {
           let textEl;
+          const textStyleMaybeBold = [
+            { fontWeight: index < 2 ? "bold" : "normal" },
+            styles.storyText,
+          ];
           if (index == storyData.length - 1) {
             if (isLoading)
               return storyCard(
@@ -232,13 +236,13 @@ const StoryScreen = ({ nativeAd }) => {
               <TypingText
                 textId={item.idx}
                 doneTyping={setAllText}
-                style={styles.storyText}
+                style={textStyleMaybeBold}
                 loop={null}
                 steps={[item.item]}
               />
             );
           } else {
-            textEl = <Text style={styles.storyText}>{item.item}</Text>;
+            textEl = <Text style={textStyleMaybeBold}>{item.item}</Text>;
           }
           return storyCard(textEl, index);
         }}
