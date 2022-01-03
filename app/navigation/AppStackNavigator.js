@@ -66,7 +66,7 @@ const AppStackNavigator = () => {
         component={StoryScreen}
         options={{
           headerTitle: "",
-          headerBackTitle: "Back",
+          headerBackTitle: " ",
           ...TransitionPresets.SlideFromRightIOS,
         }}
       />

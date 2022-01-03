@@ -186,8 +186,7 @@ const PromptScreen = ({ navigation }) => {
           />
         </View>
       </View>
-      {/* Disabled genre for now */}
-      {/* <View style={styles.row}>
+      <View style={styles.row}>
         <View style={styles.pickerRow}>
           <Text style={[styles.mediumText, { paddingRight: 14 }]}>Genre:</Text>
           <TouchableWithoutFeedback
@@ -196,7 +195,7 @@ const PromptScreen = ({ navigation }) => {
             {Platform.OS === "ios" ? iosPicker : androidPicker}
           </TouchableWithoutFeedback>
         </View>
-      </View> */}
+      </View>
       <Text
         style={[styles.mediumText, { alignSelf: "flex-start", margin: 10 }]}
       >
