@@ -275,16 +275,28 @@ const StoryScreen = ({ nativeAd }) => {
           Undo Last
         </Button>
       </View>
-      <Button
-        disabled={bottomButtonsDisabled || storyChunks.length === 0}
-        onPress={retryPrompt}
-        style={{ alignSelf: "center", marginBottom: 10 }}
-        mode="contained"
-        icon="cached"
-        color={colors.bloodRed}
-      >
-        Retry Prompt
-      </Button>
+      <View style={styles.bottomButtonsRow}>
+        <Button
+          disabled={bottomButtonsDisabled || storyChunks.length === 0}
+          onPress={retryPrompt}
+          style={{ alignSelf: "center", marginBottom: 10 }}
+          mode="contained"
+          icon="cached"
+          color={colors.bloodRed}
+        >
+          Retry Prompt
+        </Button>
+        <Button
+          disabled={bottomButtonsDisabled || storyChunks.length === 0}
+          onPress={onShare}
+          style={{ alignSelf: "center", marginBottom: 10 }}
+          mode="contained"
+          icon={Platform.OS === "ios" ? "export-variant" : "share"}
+          color={colors.mustardYellow}
+        >
+          Share
+        </Button>
+      </View>
     </View>
   );
 };

@@ -9,4 +9,5 @@ export default colors = {
   aqua: "#6ad9ca",
   gold: "#d9c76a",
   bloodRed: "#9e1924",
+  mustardYellow: "#EAAA00",
 };
