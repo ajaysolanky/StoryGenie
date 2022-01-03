@@ -230,7 +230,7 @@ const PromptScreen = ({ navigation }) => {
       />
       <Button
         onPress={submitPrompt}
-        disabled={promptText === ""}
+        disabled={finalPromptText === ""}
         mode="contained"
         icon="book-open-page-variant"
         color={colors.green}
