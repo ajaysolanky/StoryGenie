@@ -3,7 +3,7 @@
     "name": "StoryGenie",
     "slug": "StoryGenie",
     "primaryColor": "#213b55",
-    "version": "1.4.4",
+    "version": "1.4.5",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "facebookAppId": "1112497872824021",
@@ -11,7 +11,7 @@
     "facebookAutoLogAppEventsEnabled": true,
     "facebookAdvertiserIDCollectionEnabled": true,
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/story_genie.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -25,13 +25,13 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.storygenie.storygenie",
       "googleServicesFile": "./GoogleService-Info.plist",
-      "buildNumber": "1.4.4",
+      "buildNumber": "1.4.5",
       "infoPlist": {
         "NSUserTrackingUsageDescription": "We track users for advertising purposes"
       }
     },
     "android": {
-      "versionCode": 12,
+      "versionCode": 13,
       "package": "com.storygenie.storygenie",
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
