@@ -123,7 +123,11 @@ const StoryScreen = ({ nativeAd }) => {
         message: generateShareText(promptText, storyText),
       });
       if (result.action === Share.sharedAction) {
-        logEventFirebase(SHARE_SUCCESS, { activity_type: result.activityType });
+        logEventFirebase(SHARE_SUCCESS, {
+          activity_type: result.activityType,
+          promptText: promptText,
+          storyText: storyText,
+        });
       } else {
         logEventFirebase(SHARE_DISMISS);
       }
@@ -328,6 +332,7 @@ const styles = StyleSheet.create({
     // backgroundColor: "red",
     flexGrow: 0,
     width: "100%",
+    marginBottom: 10,
   },
   descRow: {
     flexDirection: "row",

@@ -3,7 +3,7 @@
     "name": "StoryGenie",
     "slug": "StoryGenie",
     "primaryColor": "#213b55",
-    "version": "1.4.3",
+    "version": "1.4.4",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "facebookAppId": "1112497872824021",
@@ -25,13 +25,13 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.storygenie.storygenie",
       "googleServicesFile": "./GoogleService-Info.plist",
-      "buildNumber": "1.4.3",
+      "buildNumber": "1.4.4",
       "infoPlist": {
         "NSUserTrackingUsageDescription": "We track users for advertising purposes"
       }
     },
     "android": {
-      "versionCode": 11,
+      "versionCode": 12,
       "package": "com.storygenie.storygenie",
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
