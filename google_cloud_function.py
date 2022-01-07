@@ -52,12 +52,78 @@ def do_magic(request):
         data["max_length"] = min(MAX_MAX_LENGTH, data.get("max_length", 1))
         response = requests.post(to_url, headers=headers, json=data)
         print(to_url)
+        print('data=' + str(data))
         print(response.status_code)
         if response.status_code < 200 or response.status_code >= 300:
+            print(response.json())
             raise Exception('NC request error')
-        print('data=' + str(data))
         print('response=' + response.text)
         return response.text
+    else:
+        return f"no args?! tf"
+
+def do_magic_openai(request):
+    """Responds to any HTTP request.
+    Args:
+        request (flask.Request): HTTP request object.
+    Returns:
+        The response text or any set of values that can be turned into a
+        Response object using
+        `make_response <http://flask.pocoo.org/docs/1.0/api/#flask.Flask.make_response>`.
+    """
+    MAX_MAX_LENGTH = 50
+    DAILY_MAX_REQUESTS = 5000
+
+    import os
+    import requests
+    from datetime import date
+
+    fdate = date.today().strftime('%d%m%Y')
+
+    firebase_url = "https://storygenie-default-rtdb.firebaseio.com/daily.json?auth=%s" % os.environ.get('FB_DB_SECRET', 'not the secret')
+
+    fb_resp = requests.get(firebase_url + '&orderBy="$key"&equalTo="%s"' % fdate)
+    # if fb_resp.status_code < 200 or fb_resp.status_code >= 300:
+    #     raise Exception('FB request error')
+    fb_json = fb_resp.json()
+    query_count = fb_json.get(fdate, {}).get("global", 0)
+
+    query_count += 1 #obvious race condition here but fuck it i guess
+    print("query count: " + str(query_count))
+    
+    if query_count >= DAILY_MAX_REQUESTS:
+        return 'max requests exceeded'
+
+    put_status = requests.put(firebase_url, json={fdate: {"global": query_count}})
+
+    if put_status.status_code != 200:
+        raise Exception('FB put status: ' + str(put_status))
+
+    base_url = "https://api.openai.com/v1/engines/davinci/completions"
+
+    headers = {"Content-Type": "application/json", "Authorization": "Bearer %s" % os.environ.get('OAI_TK', 'not the token')}
+
+    request_json = request.get_json()
+    
+    if request_json:
+        # return f'hmm'
+        request_json["max_tokens"] = request_json["max_length"]
+        request_json["prompt"] = request_json["text"]
+        request_json["echo"] = not request_json.get("remove_input", True)
+        valid_keys = ["max_tokens", "echo", "temperature",
+                        "top_p", "prompt"]
+        data = {k:v for (k,v) in request_json.items() if (k in valid_keys)}
+        data["max_tokens"] = min(MAX_MAX_LENGTH, data.get("max_tokens", 1))
+        response = requests.post(base_url, headers=headers, json=data)
+        print(base_url)
+        print('data=' + str(data))
+        print(response.status_code)
+        if response.status_code < 200 or response.status_code >= 300:
+            print(response.json())
+            raise Exception('OAI request error')
+        print('response=' + response.text)
+        to_return = {'nb_generated_tokens': 0, 'generated_text': response.json().get('choices',[])[0].get('text','')}
+        return str(to_return)
     else:
         return f"no args?! tf"
 
