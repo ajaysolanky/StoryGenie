@@ -17,15 +17,15 @@ const defaultArgs = {
 };
 
 const addStoryHeader = (mood, name, storyText) => {
-  const moodLine = mood ? ` ${mood}` : "";
-  const nameLine = name ? ` about a person named ${name}` : "";
-  //   return `This is a${moodLine} story${nameLine}...\n\n${storyText}`;
-  return `Write a${moodLine} story${nameLine} based on this prompt:\nPrompt:\n${storyText}`;
-  //   const moodLine = mood ? ` The genre of this story is ${mood}.` : "";
-  //   const nameLine = name
-  //     ? ` The main character of this story is named ${name}.`
-  //     : "";
-  //   return `Here's a story.${moodLine}${nameLine}\n${storyText}`;
+  // const moodLine = mood ? ` ${mood}` : "";
+  // const nameLine = name ? ` about a person named ${name}` : "";
+  // //   return `This is a${moodLine} story${nameLine}...\n\n${storyText}`;
+  // return `Write a${moodLine} story${nameLine} based on this prompt:\nPrompt:\n${storyText}`;
+  const moodLine = mood ? ` The genre of this story is ${mood}.` : "";
+  const nameLine = name
+    ? ` The main character of this story is named ${name}.`
+    : "";
+  return `Here's a story.${moodLine}${nameLine}\n${storyText}`;
 };
 
 export const generateInitStory = (mood, name, promptText) => {
