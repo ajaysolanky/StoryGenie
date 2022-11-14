@@ -75,6 +75,7 @@ def do_magic_openai(request):
     DAILY_MAX_REQUESTS = 5000
 
     import os
+    import json
     import requests
     from datetime import date
 
@@ -123,7 +124,7 @@ def do_magic_openai(request):
             raise Exception('OAI request error')
         print('response=' + response.text)
         to_return = {'nb_generated_tokens': 0, 'generated_text': response.json().get('choices',[])[0].get('text','')}
-        return str(to_return)
+        return json.dumps(to_return)
     else:
         return f"no args?! tf"
 
